@@ -1,0 +1,239 @@
+@import "tailwindcss";
+
+/* ========== 全局基础样式 ========== */
+
+:root {
+  --background: #faf8f5;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #8b4513;
+  --primary-foreground: #ffffff;
+  --secondary: #d4a574;
+  --secondary-foreground: #1a1a1a;
+  --muted: #f5f0eb;
+  --muted-foreground: #6b5c4e;
+  --accent: #c75b39;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e5dfd6;
+  --input: #e5dfd6;
+  --ring: #8b4513;
+  --radius: 0.75rem;
+
+  /* 胡同主题色 */
+  --hutong-red: #c75b39;
+  --hutong-gold: #d4a574;
+  --hutong-brown: #8b4513;
+  --hutong-green: #5a7247;
+  --hutong-gray: #6b5c4e;
+}
+
+/* 暗色主题（可选） */
+.dark {
+  --background: #1a1612;
+  --foreground: #f5f0eb;
+  --card: #2a2420;
+  --card-foreground: #f5f0eb;
+  --popover: #2a2420;
+  --popover-foreground: #f5f0eb;
+  --primary: #d4a574;
+  --primary-foreground: #1a1a1a;
+  --secondary: #3d342a;
+  --secondary-foreground: #f5f0eb;
+  --muted: #3d342a;
+  --muted-foreground: #a89880;
+  --accent: #e07a55;
+  --accent-foreground: #1a1a1a;
+  --destructive: #ef4444;
+  --destructive-foreground: #f5f0eb;
+  --border: #3d342a;
+  --input: #3d342a;
+  --ring: #d4a574;
+}
+
+/* 自定义主题变量（供 Tailwind 使用） */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-family-serif: "Noto Serif SC", "SimSun", Georgia, serif;
+  --font-family-sans: "Noto Sans SC", system-ui, sans-serif;
+
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-slide-up: slide-up 0.6s ease-out;
+  --animate-float: float 3s ease-in-out infinite;
+
+  /* 胡同主题颜色 */
+  --color-hutong-red: var(--hutong-red);
+  --color-hutong-gold: var(--hutong-gold);
+  --color-hutong-brown: var(--hutong-brown);
+  --color-hutong-green: var(--hutong-green);
+  --color-hutong-gray: var(--hutong-gray);
+}
+
+/* ========== 基础重置样式 ========== */
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-family-sans);
+  margin: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 标题使用衬线字体 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-serif);
+  color: var(--hutong-brown);
+}
+
+/* ========== Leaflet 地图样式覆盖 ========== */
+
+/* 确保地图容器正确渲染 */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+}
+
+/* 自定义地图标记样式 */
+.custom-marker {
+  background: var(--hutong-red);
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.custom-marker:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* 弹窗样式优化 */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 0;
+}
+
+.leaflet-popup-content {
+  margin: 16px;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Tooltip 样式 - hover 小文字框 */
+.hutong-tooltip .leaflet-tooltip-left::before,
+.hutong-tooltip .leaflet-tooltip-right::before {
+  display: none;
+}
+
+.hutong-tooltip {
+  background: white !important;
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+}
+
+/* ========== 动画定义 ========== */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0); 
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ========== 滚动条美化 ========== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--hutong-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hutong-brown);
+}
+
+/* ========== 选择文本样式 ========== */
+
+::selection {
+  background-color: var(--hutong-gold);
+  color: white;
+}
+
+/* ========== 图片优化 ========== */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========== 链接样式 ========== */
+
+a {
+  color: var(--hutong-brown);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--hutong-red);
+}
