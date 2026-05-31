@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
 import MapPage from './pages/MapPage'
 import HutongDetailPage from './pages/HutongDetailPage'
@@ -9,7 +9,7 @@ import MemoryPage from './pages/MemoryPage'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="min-h-screen bg-hutong-paper paper-texture">
         <Routes>
           <Route path="/" element={<MapPage />} />
@@ -20,7 +20,7 @@ function App() {
           <Route path="/hutong/:id/memory" element={<MemoryPage />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
