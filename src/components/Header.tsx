@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { MapPin, Menu, X } from 'lucide-react'
+import { MapPin, Menu, Search, X } from 'lucide-react'
 import { useState } from 'react'
 import { hutongList } from '@/data/hutongs'
+import SearchDialog from '@/components/SearchDialog'
 
 // 有详细内容的胡同 ID
 const hutongWithContent = ['zhuanta']
@@ -15,6 +16,7 @@ interface HeaderProps {
 export default function Header({ showBack = false, backTo = '/', title }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [pendingHutong, setPendingHutong] = useState<string | null>(null)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-[9999] bg-gradient-to-r from-[hsl(25,55%,30%)] to-[hsl(20,40%,35%)] shadow-lg border-b-2 border-[hsl(35,50%,45%)]">
@@ -58,8 +60,14 @@ export default function Header({ showBack = false, backTo = '/', title }: Header
             </h1>
           )}
 
-          {/* 占位 */}
-          <div className="w-10" />
+          {/* 搜索按钮 */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="p-2 rounded-lg text-[hsl(42,60%,80%)] hover:text-white hover:bg-[hsla(0,0%,100%,0.1)] transition-all cursor-pointer"
+            title="搜索"
+          >
+            <Search className="w-5 h-5" />
+          </button>
         </div>
 
         {/* 胡同列表下拉菜单 */}
@@ -101,6 +109,9 @@ export default function Header({ showBack = false, backTo = '/', title }: Header
           </div>
         )}
       </div>
+
+      {/* 搜索弹窗 */}
+      <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {/* "正在搭建中" 提示弹窗 */}
       {pendingHutong && (
